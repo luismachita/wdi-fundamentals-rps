@@ -26,13 +26,13 @@ function getPlayerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
-     if (move < 0.33){
+     if (move == 1){
     return "rock";
     }
-    else if (move <0.66){
+    else if (move == 2){
     return "paper";
     }
-    else if (move <1.00){
+    else if (move == 3){
     return "scissors";
     }
     else{
