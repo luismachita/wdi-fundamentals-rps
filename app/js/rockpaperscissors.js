@@ -36,14 +36,13 @@ function getPlayerMove(move) {
     } else if (move === 'rock') {
         console.log("Player picks rock.");
         return 'rock';
-    } else  {
-        getInput();
+    } else {
+        move = getInput();
+        return move;
     }
 }
-
     // If a move is given, your expression should evaluate to that move.
     // If move is not specified / is null, your expression should run randomPlay()
-
 function getComputerMove(move) {
     if (move === 'scissors') {
         console.log("Computer picks scissors.");
@@ -55,7 +54,8 @@ function getComputerMove(move) {
         console.log("Computer picks rock.");
         return 'rock';
     } else {
-        return randomPlay();
+       move = randomPlay();
+       return move;
     }
 }
 
@@ -64,55 +64,62 @@ function getComputerMove(move) {
 // Assume that the only possible input values we can get are 'rock', 'paper', and 'scissors'.
 
 function getWinner(playerMove, computerMove) {
+    var winner;
     if (playerMove === computerMove) {
-        console.log("This round is a tie!");
-        return 'tie';  
+        winner = 'tie';  
     } else if (playerMove === 'rock' && computerMove === 'scissors') {
-        console.log("Player wins this round!");
-        return 'player';
+        winner = 'player';
     } else if (playerMove === 'scissors' && computerMove === 'paper') {
-            console.log("Player wins this round!");
-            return 'player';
+            winner = 'player';
     } else if (playerMove === 'paper' && computerMove === 'rock') {       
-            console.log("Player wins this round!");
-            return 'player';
+            winner = 'player';
     } else {
-        console.log("Computer wins this round!");
-        return 'computer';
-    }
+        winner= 'computer';
+    } 
+        return winner;
 }
+
+
 // This function should continue to play Rock Paper Scissors until either the player or the computer has won five times.
-function playToFive() {
+
+
+
+ function playToFive() {
     console.log("Let's play Rock, Paper, Scissors");
-    var playerWins = 0, computerWins = 0, winner = getWinner(); 
-    if (winner === 'player') {
-        while (playerWins < 5) {
-            playerWins++;
-            console.log("Player wins this round.");
-            break;
-        }
-    } else if (winner === 'computer') {
-        while (computerWins < 5) {
-            computerWins++;
-            console.log("Computer wins this round.")
-            break;
-        }
-    } if (playerWins === 5) {
-        console.log("Player wins this game!");
-        console.log("New Game starts");
-        getInput();
-    } else if (computerWins === 5) {
-        console.log("Computer wins this game!");
-        console.log("New Game starts");
-        getInput();
-    }
+    var playerWins = 0;
+    var computerWins = 0;
 
-    
-       console.log("Score: " + playerWins + " player wins, " + computerWins + " computer wins");
-    return [playerWins, computerWins];
-    }
+    while (playerWins < 5 && computerWins < 5) {
+       var playerMove = getPlayerMove();
+       var computerMove = getComputerMove();
+       var winner = getWinner(playerMove, computerMove);
 
+       console.log("Player played " + playerMove + " and Computer played " + computerMove + "!");
+
+       if (winner === 'player') {
+           console.log("Player won that round!");
+           playerWins++;
+       } else if (winner === 'computer') {
+           console.log("Computer won that round!");
+           computerWins++;
+       } else {
+           console.log("That round was a tie!");
+       }
+
+       console.log("The score is Player: " + playerWins + " to Computer: " + computerWins + "!");
+    }
+        if (playerWins > computerWins){
+          console.log("Player won this game!");
+        } else {
+          console.log("Computer won this game!");
+        }
+
+        return [playerWins, computerWins];
+
+
+}
     
+
 // After each 'round', display some text in the console indicating who played what, who won, and what the current scoreboard looks like.
 // For example,console.log("Player chose " + playerMove + " while Computer chose " + computerMove);
 //  console.log("The score is currently " + playerWins + " to " + computerWins + "\n");
